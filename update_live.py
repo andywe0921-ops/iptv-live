@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 自动从公开维护源抓取并生成分类 live.txt
-优先保留用户反馈流畅的 CCTV 节点，并尽量补全卫视
+优先保留用户反馈流畅的 CCTV 节点（123.160），并尽量补全卫视
 """
 
 import re
@@ -17,23 +17,30 @@ SOURCES = [
     "https://cdn.jsdelivr.net/gh/vbskycn/iptv@master/tv/iptv4.txt",
 ]
 
-# 用户反馈较流畅的优先源（放在最前面）
+# 用户反馈较流畅的优先源（放在最前面）——统一优先 123.160 节点
 PREFERRED = [
     ("CCTV1综合", "http://123.160.173.129:85/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV1综合", "http://gmxw.7766.org:808/hls/89/index.m3u8"),
     ("CCTV2财经", "http://123.160.173.129:85/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0"),
-    ("CCTV3", "http://gmxw.7766.org:808/hls/91/index.m3u8"),
+    ("CCTV3", "http://123.160.173.129:85/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV3", "http://221.7.175.154:8445/tsfile/live/1002_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV4中文国际", "http://123.160.173.129:85/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0"),
-    ("CCTV5", "http://gmxw.7766.org:808/hls/93/index.m3u8"),
+    ("CCTV5", "http://123.160.173.129:85/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV5", "http://221.7.175.154:8445/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV6电影", "http://123.160.173.129:85/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV7国防军事", "http://123.160.173.129:85/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0"),
-    ("CCTV8", "http://gmxw.7766.org:808/hls/96/index.m3u8"),
+    ("CCTV8", "http://123.160.173.129:85/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV8", "http://221.7.175.154:8445/tsfile/live/1006_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV9纪录", "http://123.160.173.129:85/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV10科教", "http://123.160.173.129:85/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV11戏曲", "http://123.160.173.129:85/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV12", "http://123.160.173.129:85/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV12", "http://221.7.175.154:8445/tsfile/live/1010_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV14少儿", "http://123.160.173.129:85/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0"),
-    ("CCTV15", "http://gmxw.7766.org:808/hls/102/index.m3u8"),
+    ("CCTV15", "http://123.160.173.129:85/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0"),
+    ("CCTV15", "http://59.39.89.130:60901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("CCTV16", "http://gmxw.7766.org:808/hls/169/index.m3u8"),
+    ("CCTV17", "http://59.39.89.130:60901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("北京卫视", "http://123.160.173.129:85/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("广东卫视", "http://123.160.173.129:85/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0"),
     ("深圳卫视", "http://123.160.173.129:85/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0"),
